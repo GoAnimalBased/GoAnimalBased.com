@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Animal Based - Infographic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(139, 115, 85, 0.02) 10px,
+                    rgba(139, 115, 85, 0.02) 20px
+                ),
+                linear-gradient(
+                    180deg,
+                    #f5f1e8 0%,
+                    #ebe5d8 50%,
+                    #f5f1e8 100%
+                );
+            padding: 20px;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(196, 163, 90, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 115, 85, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background-color: #f5f1e8;
+        }
+        
+        /* Header */
+        .header {
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.03) 0px,
+                    transparent 2px,
+                    transparent 4px,
+                    rgba(255, 255, 255, 0.03) 6px
+                ),
+                linear-gradient(135deg, #3d5a3d 0%, #2d4a2d 50%, #1d3a1d 100%);
+            padding: 30px 40px;
+            border-bottom: 8px solid #8b7355;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo-placeholder {
+            flex-shrink: 0;
+        }
+        
+        .header-text {
+            flex: 1;
+        }
+        
+        .header h1 {
+            color: #f5f1e8;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border-left: 6px solid #8fb88f;
+            padding-left: 15px;
+        }
+        
+        .header-description {
+            color: #e5e1d8;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+            max-width: 800px;
+        }
+        
+        /* Main grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        /* Section headers */
+        .section-header {
+            padding: 20px;
+            border-radius: 30px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .section-header.eat {
+            background: linear-gradient(135deg, #7fa060 0%, #6b8e4e 50%, #5a7a41 100%);
+        }
+        
+        .section-header.avoid {
+            background: linear-gradient(135deg, #c25a5a 0%, #a64b4b 50%, #8f3e3e 100%);
+        }
+        
+        .section-header h2 {
+            color: white;
+            font-size: 36px;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Section description */
+        .section-description {
+            font-style: italic;
+            color: #4d4d4d;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+        
+        /* Grid for boxes */
+        .boxes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        /* Individual box */
+        .box {
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+        
+        .box.meat { 
+            background: linear-gradient(135deg, #6b9a6b 0%, #5d8a5d 50%, #4f7a4f 100%);
+        }
+        .box.fruit { 
+            background: linear-gradient(135deg, #8fb88f 0%, #7fa87f 50%, #6f9870 100%);
+        }
+        .box.dairy { 
+            background: linear-gradient(135deg, #e5b585 0%, #d4a574 50%, #c39563 100%);
+        }
+        .box.medium { 
+            background: linear-gradient(135deg, #ab9b7f 0%, #9b8b6f 50%, #8b7b5f 100%);
+        }
+        .box.key-box {
+            background: linear-gradient(135deg, #5a8ba8 0%, #4a7a96 50%, #3a6a84 100%);
+        }
+        .box.avoid-item { 
+            background: linear-gradient(135deg, #9b5555 0%, #8b4545 50%, #7b3838 100%);
+        }
+        .box.avoid-dark { 
+            background: linear-gradient(135deg, #8a4848 0%, #7a3939 50%, #6a2d2d 100%);
+        }
+        .box.why-avoid { 
+            background: linear-gradient(135deg, #7d4444 0%, #6d3636 50%, #5d2a2a 100%);
+        }
+        
+        /* Box icon circle */
+        .box-icon {
+            background-color: rgba(255, 255, 255, 0.3);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .box h3 {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .box .subtitle {
+            text-align: center;
+            font-size: 11px;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .box-content {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        
+        .box-content p {
+            margin: 5px 0;
+        }
+        
+        .box-content strong {
+            font-weight: bold;
+        }
+        
+        .underline-header {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        
+        .box-content ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 5px 0;
+        }
+        
+        .box-content li {
+            margin: 3px 0;
+        }
+        
+        /* Full width boxes for avoid section */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, rgba(160, 135, 100, 0.4) 0%, rgba(139, 115, 85, 0.3) 100%);
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+        
+        .footer p {
+            color: #4d4d4d;
+            font-style: italic;
+            font-size: 15px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .boxes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+                border-left: none;
+                border-top: 4px solid #8fb88f;
+                padding-left: 0;
+                padding-top: 10px;
+            }
+            
+            .logo-placeholder img {
+                width: 140px !important;
+                height: 140px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-placeholder">
+                    <img src="GOAB.jpg" alt="Go Animal Based Logo" style="width: 180px; height: 180px; border-radius: 15px; object-fit: cover; border: 4px solid rgba(255, 255, 255, 0.4); box-shadow: 0 6px 15px rgba(0,0,0,0.3);">
+                </div>
+                <div class="header-text">
+                    <h1>Animal Based Diet - Guidelines: <br />Low PUFA, Low Oxalate, Low Linoleic Acid</h1>
+                    <p class="header-description">
+                        The Animal-Based Diet, popularized by Dr. Paul Saladino, emphasizes nutrient-dense animal foods along with fruit, honey, and dairy. It limits seed oils, high-PUFA fats, and certain plant foods to help reduce inflammation and support overall metabolic health.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- EAT SECTION -->
+            <div class="eat-section">
+                <div class="section-header eat">
+                    <h2>EAT</h2>
+                </div>
+                
+                <div class="section-description">
+                    Focus: Ruminant meat + organs as foundation, low-oxalate/low-PUFA fruits, honey, raw/full-fat dairy (if tolerated). Minimize oxalates, linoleic acid (PUFA), plant toxins.
+                </div>
+                
+                <div class="boxes-grid">
+                    <!-- Meat & Seafood -->
+                    <div class="box meat">
+                        <div class="box-icon">🥩</div>
+                        <h3>MEAT & SEAFOOD</h3>
+						<div class="subtitle">Nutrient-Dense Protein & Fats – Foundation of Bioavailable Nutrients</div>
+                        <div class="box-content">
+                            <p><strong class="underline-header">✓ Eat Freely (Lowest PUFA/LA):</strong></p>
+                            <p>🥩 <strong>Ruminants:</strong> Beef (ribeye, ground, brisket, liver, heart, kidney, spleen), Lamb (chops, shank, organs), Bison, Veal – Extremely low LA (~1–3%), zero oxalate</p>
+                            <p>🧈 <strong>Animal Fats:</strong> Beef tallow, Lamb suet, Grass-fed butter, Ghee – Very low PUFA</p>
+                            
+                            <p><strong class="underline-header">◐ Moderate (Moderate PUFA):</strong></p>
+                            <p>🥚 <strong>Eggs:</strong> Pasture-raised or low-PUFA feed – reasonable 2–4/day</p>
+                            <p>🦆 <strong>Duck:</strong> Whole duck or breast – Higher MUFA but more PUFA than ruminants</p>
+                            <p>🐟 <strong>Lean White Fish:</strong> Cod, Haddock, Halibut, Flounder – Lower total fat/PUFA load</p>
+                            
+                            <p><strong class="underline-header">○ Occasional (Higher PUFA but Nutrient-Dense):</strong></p>
+                            <p>🐟 <strong>Fatty Fish:</strong> Wild salmon, Sardines, Mackerel, Herring, Anchovies – 1–2×/week – High omega-3 but total PUFA</p>
+                            
+                            <p><strong class="underline-header">✗ Avoid (High LA/PUFA):</strong></p>
+                            <p>🐔 <strong>Chicken:</strong> Especially skin, thighs, wings – very high linoleic acid</p>
+                            <p>🐖 <strong>Pork:</strong> Chops, bacon, sausage – 15–25% PUFA often</p>
+                            <p>🦃 <strong>Turkey:</strong> Especially skin/fat – similar high LA issues</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Fruit -->
+                    <div class="box meat">
+                        <div class="box-icon">🍓</div>
+                        <h3>FRUIT</h3>
+						<div class="subtitle">Low-Toxicity Carbs – Clean Energy, Easy Digestion, Low Inflammation</div>
+                        <div class="box-content">
+                            <p><strong class="underline-header">Tier 1 – Staples (Very Low Oxalate/PUFA):</strong></p>
+                            <p>🍈 <strong>Melons:</strong> Watermelon, Cantaloupe, Honeydew, Galia</p>
+                            <p>🥭 <strong>Tropical:</strong> Mango, Papaya, Pineapple, Dragon fruit, Passion fruit, Lychee</p>
+                            <p>🍌 <strong>Sweet Fruits:</strong> Banana, Apple (Honeycrisp, Fuji), Pear, Grapes, Cherries, Dates</p>
+                            <p>🍯 <strong>Sweeteners:</strong> Honey (raw organic), Maple syrup (pure)</p>
+                            
+                            
+                            <p><strong class="underline-header">Non-Sweet Fruits (Low Oxalate):</strong></p>
+                            <p>🥒 Zucchini, Cucumber, Yellow squash, Butternut squash, Pumpkin</p>
+							<p> Low-oxalate greens: Lettuce (iceberg/romaine/bibb) – minimal defenses</p>
+                            <p>🫒 Olives </p>
+							<p>🥑 Avocado (*note: moderately high in PUFA)</p>
+                            <p><strong class="underline-header">Tier 2 – Eat Variety:</strong></p>
+                            <p>🍊 <strong>Citrus:</strong> Oranges, Tangerines, Clementines, Grapefruit, Lemon/Lime</p>
+                            <p>🫐 <strong>Berries:</strong> Blueberries, Strawberries, Cranberries</p>
+                            <p>🥝 <strong>Other:</strong> Kiwi, Pomegranate, Guava, Fresh Figs</p>
+                            
+                            <p><strong class="underline-header">Tier 3 – Limit if Oxalate Sensitive:</strong></p>
+                            <p>🫐 Blackberries, Raspberries, Dried fruits</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Dairy -->
+                    <div class="box meat">
+                        <div class="box-icon">🥛</div>
+                        <h3>DAIRY</h3>
+                        <div class="subtitle">Fat-Soluble Vitamins – Nutrient Boost if Tolerated, Full-Fat Preferred</div>
+                        <div class="box-content">
+                            <p><strong class="underline-header">✓ Eat Freely (Low PUFA – Full-Fat/Raw/A2):</strong></p>
+                            <p>🥛 <strong>A2/Raw Dairy:</strong> Whole raw milk (A2 breeds like Jersey/Guernsey), Raw kefir, Raw Greek yogurt, Raw cottage cheese, Raw cream-top milk</p>
+                            <p>🧀 <strong>Hard Cheeses:</strong> Aged Parmesan, Cheddar (sharp/grass-fed), Gouda, Pecorino Romano, Gruyère, Manchego</p>
+                            
+                            <p><strong class="underline-header">◐ Moderate:</strong></p>
+                            <p>🥛 Heavy Cream/Whipping cream – low PUFA but calorie-dense, great for coffee or sauces</p>
+                            <p>🧀 <strong>Soft Cheeses:</strong> Brie, Camembert, fresh Mozzarella, Ricotta – slightly higher lactose but still low PUFA</p>
+                            
+                            <p><strong class="underline-header">✗ Avoid:</strong></p>
+                            <p>🥛 <strong>Low-Fat Dairy:</strong> Skim milk, fat-reduced yogurt, low-fat cheeses – misses fat-soluble vitamins A/D/K2</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Medium Toxic -->
+                    <div class="box fruit">
+                        <div class="box-icon">🥕</div>
+                        <h3>MEDIUM TOXIC</h3>
+                        <div class="subtitle">Moderate Plant Foods – Enjoy Sparingly if Tolerated</div>
+                        <div class="box-content">
+                            <p>🍚 <strong>White Rice:</strong> Organic or well-sourced – lower toxins than brown rice</p>
+                            <p>🥔 <strong>Roots/Tubers:</strong> Sweet potato (various colors), Yams, Carrots (cooked/peeled to reduce issues)</p>
+                            <p>🥬 <strong>Fermented Vegetables:</strong> Sauerkraut, Pickles (lacto-fermented, no additives)</p>
+                            <p>🌿 <strong>Artichoke Hearts:</strong> Fresh or canned in water/oil</p>
+                            <p>🌿 <strong>Herbs:</strong> Rosemary, Thyme, Basil, Oregano, Dill, Mint, Parsley (fresh or dried for flavoring)</p>
+                            <p>🥥 <strong>Coconut:</strong> Fresh meat, water, unsweetened flakes</p>
+                            <p>🫒 <strong>Oils:</strong> Olive oil, Avocado oil, Coconut oil
+                            <p>🐟 <strong>Low Metal Fish:</strong> Wild salmon, Sardines, Anchovies, Shellfish (oysters, clams, mussels – low-mercury options)</p>
+                            <p>🌿 <strong>Ceylon Cinnamon:</strong> True Ceylon variety (lower coumarin than cassia)</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Key -->
+                    <div class="box key-box full-width">
+                        <h3>🔑 KEY - COMMON ACRONYMS</h3>
+                        <div class="box-content">
+                            <p><strong>🔑 LA (Linoleic Acid):</strong> An omega-6 polyunsaturated fat found in seed oils and chicken/pork – promotes inflammation when consumed in excess</p>
+
+<p><strong>🔑 PUFA (Polyunsaturated Fatty Acids):</strong> Fats with multiple double bonds (includes omega-3 and omega-6) – highly unstable and prone to oxidation</p>
+
+<p><strong>🔑 MUFA (Monounsaturated Fatty Acids):</strong> Fats with one double bond (found in olive oil, avocados) – more stable than PUFA</p>
+
+<p><strong>🔑 A2 Dairy:</strong> Milk from cows producing only A2 beta-casein protein (Jersey, Guernsey breeds) – often better tolerated than conventional A1 dairy</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AVOID SECTION -->
+            <div class="avoid-section">
+                <div class="section-header avoid">
+                    <h2>AVOID</h2>
+                </div>
+                
+                <div class="section-description">
+                    High plant defense chemicals, oxalates (kidney stones), lectins (gut damage), glucosinolates (thyroid disruption), anti-nutrients (mineral blockers), high PUFA (inflammation).
+                </div>
+                
+                <div class="boxes-grid">
+                    <!-- Leafy Greens -->
+                    <div class="box avoid-item">
+                        <div class="box-icon">🥬</div>
+                        <h3>LEAFY GREENS & BRASSICAS</h3>
+                        <div class="subtitle">High Oxalates, Glucosinolates – Gut Irritation, Thyroid Disruption</div>
+                        <div class="box-content">
+                            <p>🥬 <strong>Spinach:</strong> Extremely high oxalates – binds calcium, kidney stone risk</p>
+                            <p>🥬 <strong>Kale:</strong> Loaded with oxalates and goitrogens – thyroid interference</p>
+                            <p>🥬 <strong>Chard:</strong> Extreme oxalates – worse than spinach for calcium binding</p>
+                            <p>🥬 <strong>Celery:</strong> Furanocoumarins and psoralens – skin sensitivity, gut irritation</p>
+                            <p>🥦 <strong>Broccoli:</strong> Glucosinolates and fiber – bloating, hormone disruption</p>
+                            <p>🥦 <strong>Cauliflower:</strong> High defense chemicals, gut irritants</p>
+                            <p>🥦 <strong>Brussels Sprouts:</strong> Goitrogens and sulfur – thyroid/digestion concerns</p>
+                            <p>🥬 <strong>Cabbage:</strong> Fermentable fibers and glucosinolates</p>
+                            <p>🥬 <strong>Bok Choy:</strong> Oxalates and goitrogens</p>
+                            <p>🥬 Lettuce, Asparagus, Green Leaf, Romaine, Arugula, Watercress</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Seeds & Nuts -->
+                    <div class="box avoid-item">
+                        <div class="box-icon">🥜</div>
+                        <h3>NUTS & SEEDS</h3>
+                        <div class="subtitle">High PUFA, Phytic Acid, Lectins – Inflammation, Mineral Blocking</div>
+                        <div class="box-content">
+                                                        <p><strong class="underline-header">Nuts:</strong></p>
+                            <p>🥜 <strong>Almond:</strong> Extreme oxalates – kidney stone culprit</p>
+                            <p>🥜 <strong>Walnut:</strong> High PUFA – oxidative stress</p>
+                            <p>🥜 <strong>Cashew:</strong> Lectins and urushiol</p>
+                            <p>🥜 <strong>Macadamia:</strong> Lowest oxalate of common nuts, but still contains PUFA and phytic acid</p>
+                            <p>🥜 Hazelnut, Brazil</p>
+							
+							<p><strong class="underline-header">Seeds:</strong></p>
+                            <p>🌻 <strong>Chia:</strong> High oxalates and lectins – gut lining damage</p>
+                            <p>🌻 <strong>Flax:</strong> Phytic acid and lignans – hormone mimics</p>
+                            <p>🌻 <strong>Sunflower:</strong> High PUFA (linoleic acid) – inflammation</p>
+                            <p>🌻 <strong>Pumpkin:</strong> Lectins and phytic acid</p>
+                            <p>🌻 <strong>Sesame:</strong> Oxalates and allergens</p>
+                            <p>🌻 Hemp, Poppy Seeds</p>
+                            
+
+                        </div>
+                    </div>
+                    
+                    <!-- Grains & Legumes -->
+                    <div class="box avoid-item">
+                        <div class="box-icon">🌾</div>
+                        <h3>GRAINS & LEGUMES</h3>
+                        <div class="subtitle">Lectins, Gluten, Phytic Acid – Gut Damage, Inflammation</div>
+                        <div class="box-content">
+                            <p><strong class="underline-header">Grains:</strong></p>
+                            <p>🌾 <strong>Wheat:</strong> Gluten and lectins – major gut/immune triggers</p>
+                            <p>🌾 <strong>Oats:</strong> Avenins and lectins – gluten-like issues</p>
+                            <p>🌾 <strong>Quinoa:</strong> Saponins and lectins – high defenses</p>
+							<p>🌾 <strong>Corn:</strong> High lectins, mycotoxins, often GMO – inflammatory and gut-irritating
+                            <p>🌾 Brown Rice, Millet, Amaranth</p>
+                            <p><strong class="underline-header">Legumes:</strong></p>
+                            <p>🫘 <strong>Green Peas:</strong> Lectins</p>
+                            <p>🫘 <strong>Soybeans:</strong> Isoflavones and lectins – hormone disruptors</p>
+                            <p>🫘 <strong>Kidney Beans:</strong> Phytohemagglutinin – toxic if undercooked</p>
+                            <p>🫘 <strong>Lentils:</strong> Lectins and fibers – bloating common</p>
+							<p>🫘 <strong>Chickpeas / Green Beans:</strong> Lectins and saponins – bloating and absorption blockers</p>
+							<p>🫘 <strong>Peanuts:</strong> Lectins, aflatoxins (mold), high PUFA – one of the worst legumes</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Other High-Toxin -->
+                    <div class="box avoid-item">
+                        <div class="box-icon">🌶️</div>
+                        <h3>OTHER HIGH-TOXINS</h3>
+                        <div class="subtitle">Anti-Nutrients, Saponins, Stimulants, Heavy Metals</div>
+                        <div class="box-content">
+                            <p>🍅 <strong>Nightshades:</strong> Tomato, White Potato, Eggplant, Peppers, Chili Peppers
+							<p>🍄 <strong>Mushrooms:</strong> Chitin and hydrazines – difficult digestion, potential toxins</p>
+                            <p>🥕 <strong>Beets:</strong> High oxalates – kidney stone risk, earthy taste signals plant defenses</p>
+                            <p>🥕 <strong>Radishes:</strong> Glucosinolates – spicy bite indicates irritants</p>
+                            <p>🧅 <strong>Alliums (Onion, Garlic, Leek):</strong> Sulfur compounds – gut FODMAPs, irritation</p>
+                            <p>☕ <strong>Coffee:</strong> Acrylamide and caffeine – gut irritant, dependency, adrenal stress</p>
+                            <p>🍵 <strong>Tea (all types):</strong> Caffeine, tannins, fluoride accumulation, oxalates – gut irritant, thyroid interference risk</p>
+                            <p>🍫 <strong>Chocolate:</strong> Theobromine and oxalates – stimulant properties plus heavy metals (cadmium/lead)</p>
+                            <p>🌶️ <strong>Black/White Pepper:</strong> Piperine – increases gut permeability, worsens leaky gut</p>
+                            <p>🌶️ <strong>Paprika:</strong> Nightshade-derived – capsaicin and lectins</p>
+                        </div>
+                    </div>
+					<!-- Key -->
+                    <div class="box key-box full-width">
+                        <h3>📚 RESOURCES</h3>
+                        <div class="box-content">
+						<p><strong>📚 Reddit Animal-Based Wiki:</strong> <a href="https://www.reddit.com/r/AnimalBased/wiki/index/" target="_blank" rel="noopener noreferrer">Reddit Animal-Based Wiki</a></p>
+<p><strong>📚 Macro Calculator:</strong> <a href="https://macros.coyote.technology/" target="_blank" rel="noopener noreferrer">Macro Calculator</a></p>
+
+<p><strong>📚 Heart & Soil Guide:</strong> <a href="https://heartandsoil.co/blog/the-ultimate-animal-based-diet-food-list/?utm_campaign=non_brand_search&utm_source=s" target="_blank" rel="noopener noreferrer">Heart & Soil Guide</a></p>
+
+<p><strong>📚 Oxalate Count:</strong> <a href="https://ucikidneystonecenter.com/wp-content/uploads/2020/06/Oxalate-Content-of-Foods.pdf" target="_blank" rel="noopener noreferrer">Oxalate Content of Foods PDF</a></p>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p style="margin-top: 15px; font-size: 13px; font-style: normal;">
+                Copyright © <a href="https://GoAnimalBased.com" target="_blank" style="color: #6b8e4e; text-decoration: none; font-weight: bold;">GoAnimalBased.com</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
